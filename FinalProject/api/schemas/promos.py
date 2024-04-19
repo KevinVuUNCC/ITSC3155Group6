@@ -11,8 +11,9 @@ class PromoBase(BaseModel):
 class PromoCreate(PromoBase):
     user_id: int
 
+
 class PromoUpdate(BaseModel):
-    username: [str] = None
+    username: Optional[str] = None
     user_id: Optional[int] = None
     promoText: Optional[str] = None
     amount: Optional[int] = None
@@ -21,5 +22,5 @@ class PromoUpdate(BaseModel):
 class Promo(PromoBase):
     id: int
 
-    class ConfigDict:
-        from_attributes = True
+    class Config:
+        allow_population_by_field_name = True

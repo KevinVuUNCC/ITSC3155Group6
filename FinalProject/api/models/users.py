@@ -11,5 +11,10 @@ class User(Base):
     username = Column(String(100),  nullable=True)
     employmentStatus = Column(String(100), nullable=True)
 
-    users = relationship("User", back_populates="review")
-    users = relationship("User", back_populates="promo")
+    manager_id = Column(Integer, ForeignKey('users.id'), nullable=True)
+    subordinates = relationship("User",
+                                backref="manager",
+                                remote_side=[id])
+
+    reviews = relationship("Review", back_populates="user")
+    promos = relationship("Promo", back_populates="user")
